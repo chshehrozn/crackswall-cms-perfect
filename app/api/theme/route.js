@@ -1,4 +1,4 @@
-import { readConfig } from '@/lib/config';
+import { readConfig } from '@/lib/config-server';
 import { readTheme } from '@/lib/theme';
 import { NextResponse } from 'next/server';
 
