@@ -1,0 +1,33 @@
+{
+  "site": {
+    "name": "ShehrozPC",
+    "tagline": "Full Version Software",
+    "metaDescription": "Download the latest full version software, games, and tools for free.",
+    "logo": "/images/zeezfaveicon.png",
+    "favicon": "/images/zeezfaveicon.png",
+    "primaryColor": "#9333ea",
+    "secondaryColor": "#7c3aed"
+  },
+  "header": {
+    "backgroundColor": "#ffffff",
+    "textColor": "#2b373a",
+    "showNavTitle": true,
+    "sticky": true
+  },
+  "footer": {
+    "backgroundColor": "#21282a",
+    "textColor": "#bbbbbb",
+    "copyrightText": "Copyright © {year} - All right reserved by SHEHROZPC"
+  },
+  "productCard": {
+    "backgroundColor": "#ffffff",
+    "borderColor": "#dedede",
+    "showRating": true,
+    "titleColor": "#2b373a"
+  },
+  "menu": {
+    "activeColor": "#9333ea",
+    "hoverColor": "#7c3aed",
+    "fontSize": "16px"
+  }
+}

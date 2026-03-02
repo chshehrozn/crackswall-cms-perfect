@@ -1,0 +1,100 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model blogs {
+  id                   BigInt        @id @default(autoincrement())
+  title                String?       @db.Text
+  category_id          Int?
+  slug                 String?       @db.Text
+  detail               String?       @db.LongText
+  image                String?       @db.Text
+  status               String?       @db.VarChar(255)
+  is_deleted           Int?
+  created_at           DateTime?     @db.Timestamp(0)
+  updated_at           DateTime?     @db.Timestamp(0)
+  software_name        String?       @db.Text
+  software_version     String?       @db.Text
+  software_description String?       @db.Text
+  software_image       String?       @db.Text
+  publisher_name       String?       @db.Text
+  application_category String?       @db.Text
+  date_published       String?       @db.Text
+  date_modified        String?       @db.Text
+  operating_system     String?       @db.Text
+  price                String?       @db.Text
+  review_count         String?       @db.Text
+  rating_value         String?       @db.Text
+  blogkey              String?       @db.Text
+  downloadable_link    String?       @db.Text
+  subcategory_id       Int?          @default(0)
+  licence              String?       @db.Text
+  slugs                String?       @db.Text
+  created_date         DateTime?     @db.Date
+  created_time         DateTime?     @db.Time(0)
+  soft_image           String?       @db.Text
+  file_size            String?       @db.VarChar(255)
+  no_of_download       Int?          @default(0)
+  virustotal_link      String?       @db.Text
+  system_requirements  String?       @db.LongText
+  changelog            String?       @db.LongText
+  zip_password         String?       @db.Text
+  download_mirrors     String?       @db.LongText
+  category             slip_categories? @relation("blogCategory", fields: [category_id], references: [id])
+  subcategory          slip_categories? @relation("blogSubcategory", fields: [subcategory_id], references: [id])
+  images               blog_images[]
+}
+
+model blog_images {
+  id         Int      @id @default(autoincrement())
+  blog_id    BigInt?
+  image_path String?  @db.Text
+  created_at DateTime? @db.Timestamp(0)
+  updated_at DateTime? @db.Timestamp(0)
+  blog       blogs?   @relation(fields: [blog_id], references: [id])
+}
+
+model slip_categories {
+  id            Int      @id @default(autoincrement())
+  title         String?  @db.VarChar(255)
+  slug          String?  @db.VarChar(255)
+  status        String?  @db.VarChar(255)
+  category_id   Int?     @default(0)
+  created_at    DateTime? @db.Timestamp(0)
+  updated_at    DateTime? @db.Timestamp(0)
+  icon_code     String?  @db.Text
+  blogs_as_cat  blogs[]  @relation("blogCategory")
+  blogs_as_sub  blogs[]  @relation("blogSubcategory")
+}
+
+model comments {
+  id      Int     @id @default(autoincrement())
+  blog_id Int?
+  email   String? @db.VarChar(255)
+  name    String? @db.VarChar(255)
+  comment String? @db.Text
+}
+
+model users {
+  id         BigInt    @id @default(autoincrement())
+  name       String?   @db.VarChar(255)
+  email      String?   @db.VarChar(255)
+  password   String?   @db.VarChar(255)
+  type       String?   @db.VarChar(255)
+  created_at DateTime? @db.Timestamp(0)
+  updated_at DateTime? @db.Timestamp(0)
+}
+
+model reported_links {
+  id         Int       @id @default(autoincrement())
+  blog_id    BigInt?
+  reason     String?   @db.Text
+  status     String?   @db.VarChar(50) @default("pending")
+  created_at DateTime? @default(now()) @db.Timestamp(0)
+  updated_at DateTime? @updatedAt @db.Timestamp(0)
+}
