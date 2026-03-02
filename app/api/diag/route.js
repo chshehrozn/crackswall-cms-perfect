@@ -14,6 +14,7 @@ export async function GET() {
         NEXT_PUBLIC_FRONTEND_URL: process.env.NEXT_PUBLIC_FRONTEND_URL ? 'EXISTS' : 'MISSING',
         NODE_ENV: process.env.NODE_ENV,
         NEXT_RUNTIME: process.env.NEXT_RUNTIME || 'nodejs (default)',
+        ALL_KEYS: Object.keys(process.env).filter(k => !k.includes('SECRET') && !k.includes('PASSWORD') && !k.includes('TOKEN') && !k.includes('KEY')).join(', ')
     };
 
     const results = {
