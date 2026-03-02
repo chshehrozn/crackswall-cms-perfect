@@ -22,7 +22,10 @@ async function uploadToBackend(fileOrBuffer, filename = null) {
     }
 
     try {
-        const res = await fetch(`${apiUrl}/cms-upload`, {
+        const cleanUrl = apiUrl.replace(/\/$/, '');
+        const targetUrl = cleanUrl.endsWith('/api') ? cleanUrl : `${cleanUrl}/api`;
+
+        const res = await fetch(`${targetUrl}/cms-upload`, {
             method: 'POST',
             headers: { 'X-CMS-MASTER-TOKEN': apiToken },
             body: formData

@@ -39,7 +39,7 @@ export async function GET(request) {
 
         const where = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
 
-        const [blogs, [{ total }], parentCategories, statusCounts, trashCount] = await Promise.all([
+        const [blogs, countRows, parentCategories, statusCounts, trashCountRows] = await Promise.all([
             query(
                 `SELECT b.id, b.title, b.slugs, b.status, b.soft_image, b.no_of_download, b.created_at, b.category_id,
                  c.title as cat_title, c.slug as cat_slug
@@ -66,20 +66,21 @@ export async function GET(request) {
             query(`SELECT COUNT(*) as count FROM blogs WHERE is_deleted = 1`),
         ]);
 
+        const total = countRows[0]?.total || 0;
         const totalPages = Math.ceil(total / perPage);
 
         return NextResponse.json({
             status: true,
             data: {
-                blogs,
+                blogs: Array.isArray(blogs) ? blogs : [],
                 total,
                 page,
                 perPage,
                 totalPages,
-                categories: parentCategories,
+                categories: Array.isArray(parentCategories) ? parentCategories : [],
                 counts: {
                     ...(statusCounts[0] || { all_count: 0, active_count: 0, draft_count: 0 }),
-                    trash_count: trashCount[0]?.count || 0,
+                    trash_count: trashCountRows[0]?.count || 0,
                 },
             }
         });
