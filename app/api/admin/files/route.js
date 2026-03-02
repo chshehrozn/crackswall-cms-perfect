@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { readConfig } from '@/lib/config';
+import { readConfig } from '@/lib/config-server';
 import fs from 'fs/promises';
 import path from 'path';
 

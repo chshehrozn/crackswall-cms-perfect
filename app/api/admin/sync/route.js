@@ -1,16 +1,4 @@
-import { NextResponse } from 'next/server';
-import { query } from '@/lib/db';
-import fs from 'fs';
-import path from 'path';
-
-function readConfig() {
-    try {
-        const file = fs.readFileSync(path.join(process.cwd(), 'config.json'), 'utf8');
-        return JSON.parse(file);
-    } catch (e) {
-        return {};
-    }
-}
+import { readConfig } from '@/lib/config-server';
 
 export async function POST(request) {
     try {
