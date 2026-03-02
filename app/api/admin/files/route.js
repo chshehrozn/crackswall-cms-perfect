@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
-import { readConfig } from '@/lib/config-server';
-import fs from 'fs/promises';
-import path from 'path';
+import { readConfig } from '@/lib/config';
 
 export async function GET(request) {
     const pin = request.headers.get('x-admin-pin');
@@ -16,6 +14,8 @@ export async function GET(request) {
     const reqPath = searchParams.get('path') || '';
 
     // Security: Only allow paths within process.cwd()
+    const fs = eval('require("fs/promises")');
+    const path = eval('require("path")');
     const basePath = process.cwd();
     const targetPath = path.join(basePath, reqPath);
 
@@ -66,6 +66,8 @@ export async function POST(request) {
         }
 
         const { path: reqPath, content } = await request.json();
+        const fs = eval('require("fs/promises")');
+        const path = eval('require("path")');
         const basePath = process.cwd();
         const targetPath = path.join(basePath, reqPath);
 

@@ -1,4 +1,6 @@
-import { readConfig } from '@/lib/config-server';
+import { NextResponse } from 'next/server';
+import { query } from '@/lib/db';
+import { readConfig } from '@/lib/config';
 
 export async function POST(request) {
     try {

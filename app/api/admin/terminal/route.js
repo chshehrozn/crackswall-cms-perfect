@@ -1,10 +1,5 @@
 import { NextResponse } from 'next/server';
 import { readConfig } from '@/lib/config';
-import { exec } from 'child_process';
-import util from 'util';
-import path from 'path';
-
-const execAsync = util.promisify(exec);
 
 export async function POST(request) {
     try {
@@ -17,6 +12,12 @@ export async function POST(request) {
         }
 
         const { command, cwd } = await request.json();
+
+        // Node.js only dependencies
+        const { exec } = eval('require("child_process")');
+        const util = eval('require("util")');
+        const path = eval('require("path")');
+        const execAsync = util.promisify(exec);
 
         let execCwd = process.cwd();
         if (cwd) {

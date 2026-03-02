@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import mysql from 'mysql2/promise';
 import bcrypt from 'bcryptjs';
 import { writeConfig } from '@/lib/config';
 
@@ -8,6 +7,7 @@ export async function POST(request) {
         const { db, storage, admin } = await request.json();
 
         // 1. Connect to the database
+        const mysql = eval('require("mysql2/promise")');
         const conn = await mysql.createConnection({
             host: db.host, port: parseInt(db.port),
             database: db.database, user: db.user, password: db.password,
