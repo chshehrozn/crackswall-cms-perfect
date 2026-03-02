@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { query } from '@/lib/db';
-import { readConfig } from '@/lib/config';
+import { readConfig } from '@/lib/config-server';
 
 export async function POST(request) {
     try {

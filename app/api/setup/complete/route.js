@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
-import { writeConfig } from '@/lib/config';
+import { writeConfig } from '@/lib/config-server';
 
 export async function POST(request) {
     try {

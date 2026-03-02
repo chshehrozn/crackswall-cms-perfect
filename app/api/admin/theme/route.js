@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { readTheme, writeTheme } from '@/lib/theme';
-import { readConfig, writeConfig } from '@/lib/config';
+import { readConfig, writeConfig } from '@/lib/config-server';
 
 export async function GET() {
     try {
